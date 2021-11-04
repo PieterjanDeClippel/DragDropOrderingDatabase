@@ -1,0 +1,8 @@
+.handle {
+  width: 2rem;
+  background: #888;
+
+  *[cdkdraghandle] {
+    cursor: move;
+  }
+}

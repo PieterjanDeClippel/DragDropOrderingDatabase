@@ -1,0 +1,26 @@
+<body>
+  <div class="container px-0 py-5" #notesList="cdkDropList" cdkDropList [cdkDropListData]="notes" (cdkDropListDropped)="noteDropped($event)">
+    <div class="form-group row m-0 flex-nowrap" *ngFor="let note of notes" cdkDrag>
+      <div class="handle p-0">
+        <div cdkDragHandle class="h-100 w-auto checkerboard"></div>
+      </div>
+      <div class="flex-grow-1 w-auto flex-shrink-inherit">
+        <div class="row">
+          <div class="col me-0 px-0">
+            <div class="list-group-item">
+              {{ note.text }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row m-0">
+      <div class="col-md-9">
+        <input type="text" class="form-control" [(ngModel)]="newNoteText" />
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-primary w-100" (click)="addNote(newNoteText)">Add</button>
+      </div>
+    </div>
+  </div>
+</body>
