@@ -19,6 +19,7 @@ export class AppComponent {
   title = 'ClientApp';
   notes: Note[] = [];
   newNoteText: string = '';
+  numberOfSwaps: number = 0;
 
   addNote(text: string) {
     this.noteService.createNote(text).subscribe((note) => {
@@ -28,6 +29,7 @@ export class AppComponent {
 
   noteDropped(event: CdkDragDrop<Note[]>) {
     if (event.previousContainer === event.container) {
+      this.numberOfSwaps++;
       moveItemInArray(
         event.container.data,
         event.previousIndex,
