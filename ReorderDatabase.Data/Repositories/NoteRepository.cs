@@ -48,7 +48,7 @@
 
         public async Task<Dtos.Note> InsertNote(Dtos.Note note)
         {
-            var last = 0;
+            ulong last = 0;
             if (noteContext.Notes.Any())
             {
                 last = noteContext.Notes.Max(n => n.Numerator);

@@ -6,8 +6,8 @@
         public string? Text { get; set; }
 
         // Ordering
-        public int Numerator { get; set; }
-        public int Denominator { get; set; }
+        public ulong Numerator { get; set; }
+        public ulong Denominator { get; set; }
         public double Order { get; set; }
     }
 }

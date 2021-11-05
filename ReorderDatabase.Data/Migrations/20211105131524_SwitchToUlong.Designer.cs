@@ -11,8 +11,8 @@ using ReorderDatabase.Data;
 namespace ReorderDatabase.Data.Migrations
 {
     [DbContext(typeof(NoteContext))]
-    [Migration("20211104130047_AddNotes")]
-    partial class AddNotes
+    [Migration("20211105131524_SwitchToUlong")]
+    partial class SwitchToUlong
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,16 +31,19 @@ namespace ReorderDatabase.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Denominator")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Denominator")
+                        .HasColumnType("decimal(20,0)");
 
-                    b.Property<int>("Numerator")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Numerator")
+                        .HasColumnType("decimal(20,0)");
 
                     b.Property<double>("Order")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("float")
-                        .HasComputedColumnSql("[Numerator] / [Denominator]", true);
+                        .HasComputedColumnSql("CAST([Numerator] AS DOUBLE PRECISION) / CAST([Denominator] AS DOUBLE PRECISION)", true);
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

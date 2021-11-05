@@ -4,7 +4,7 @@
 
 namespace ReorderDatabase.Data.Migrations
 {
-    public partial class AddNotes : Migration
+    public partial class SwitchToUlong : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,9 +14,10 @@ namespace ReorderDatabase.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Numerator = table.Column<int>(type: "int", nullable: false),
-                    Denominator = table.Column<int>(type: "int", nullable: false),
-                    Order = table.Column<double>(type: "float", nullable: false, computedColumnSql: "[Numerator] / [Denominator]", stored: true)
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Numerator = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
+                    Denominator = table.Column<decimal>(type: "decimal(20,0)", nullable: false),
+                    Order = table.Column<double>(type: "float", nullable: false, computedColumnSql: "CAST([Numerator] AS DOUBLE PRECISION) / CAST([Denominator] AS DOUBLE PRECISION)", stored: true)
                 },
                 constraints: table =>
                 {

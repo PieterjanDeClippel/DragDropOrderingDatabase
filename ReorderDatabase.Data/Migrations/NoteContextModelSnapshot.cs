@@ -29,11 +29,11 @@ namespace ReorderDatabase.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("Denominator")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Denominator")
+                        .HasColumnType("decimal(20,0)");
 
-                    b.Property<int>("Numerator")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Numerator")
+                        .HasColumnType("decimal(20,0)");
 
                     b.Property<double>("Order")
                         .ValueGeneratedOnAddOrUpdate()

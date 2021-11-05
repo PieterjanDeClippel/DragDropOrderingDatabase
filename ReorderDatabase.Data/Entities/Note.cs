@@ -17,8 +17,8 @@ namespace ReorderDatabase.Data.Entities
         public string? Text { get; set; }
 
 
-        public int Numerator { get; set; }
-        public int Denominator { get; set; }
+        public ulong Numerator { get; set; }
+        public ulong Denominator { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public double Order { get; }
     }
