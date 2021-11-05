@@ -16,7 +16,11 @@
           <div class="col me-0 px-0">
             <div class="list-group-item">
               {{ note.text }}
-              <span class="float-end">{{ note.numerator }} / {{ note.denominator }}</span>
+              <div class="float-end correct-margin">
+                <span class="float-end">{{ note.numerator }} / {{ note.denominator }}</span>
+                <br />
+                <span class="float-end">{{ note.numerator / note.denominator }}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -35,7 +39,8 @@
         With 10 items:
         <ul>
           <li>When using int columns, the ordering can fail 38 swaps in.</li>
-          <li>When using uint columns, the ordering can fail 87 swaps in.</li>
+          <li>When using uint columns, and a double computed column, the ordering can fail 38 swaps in.</li>
+          <li>When using uint columns, and a decimal computed column, the ordering can fail 50 swaps in.</li>
         </ul>
       </div>
     </div>

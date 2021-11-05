@@ -20,6 +20,6 @@ namespace ReorderDatabase.Data.Entities
         public ulong Numerator { get; set; }
         public ulong Denominator { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public double Order { get; }
+        public decimal Order { get; }
     }
 }
