@@ -6,7 +6,7 @@
         Task<Dtos.Note> GetNote(int id);
         Task<Dtos.Note> InsertNote(Dtos.Note note);
         Task<Dtos.Note> UpdateNote(Dtos.Note note);
-        Task<Dtos.Note> SwapNote(Dtos.NoteSwap noteSwap);
+        Task<(Dtos.Note, bool)> SwapNote(Dtos.NoteSwap noteSwap);
         Task DeleteNote(int id);
     }
 
@@ -95,7 +95,7 @@
             };
         }
 
-        public async Task<Dtos.Note> SwapNote(Dtos.NoteSwap noteSwap)
+        public async Task<(Dtos.Note, bool)> SwapNote(Dtos.NoteSwap noteSwap)
         {
             var entityNote = await noteContext.Notes.FindAsync(noteSwap.Note.Id);
             entityNote.Numerator =
@@ -108,14 +108,16 @@
             noteContext.Update(entityNote);
             await noteContext.SaveChangesAsync();
 
-            return new Dtos.Note
+            var needsReindexing = noteContext.Notes.Select(n => n.Order).Distinct().Count() != noteContext.Notes.Count();
+
+            return (new Dtos.Note
             {
                 Id = noteSwap.Note.Id,
                 Text = entityNote.Text,
                 Numerator = entityNote.Numerator,
                 Denominator = entityNote.Denominator,
                 Order = entityNote.Order,
-            };
+            }, needsReindexing);
         }
 
         public async Task DeleteNote(int id)

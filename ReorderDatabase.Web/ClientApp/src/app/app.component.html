@@ -1,8 +1,11 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         Number of swaps: {{ numberOfSwaps }}
+      </div>
+      <div class="col-md-6">
+        <span *ngIf="needsReindexing">Needs reindexing</span>
       </div>
     </div>
   </div>

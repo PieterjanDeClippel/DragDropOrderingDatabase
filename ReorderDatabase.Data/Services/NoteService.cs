@@ -8,7 +8,7 @@ namespace ReorderDatabase.Data.Services
         Task<Dtos.Note> GetNote(int id);
         Task<Dtos.Note> InsertNote(Dtos.Note note);
         Task<Dtos.Note> UpdateNote(Dtos.Note note);
-        Task<Dtos.Note> SwapNote(Dtos.NoteSwap noteSwap);
+        Task<(Dtos.Note, bool)> SwapNote(Dtos.NoteSwap noteSwap);
         Task DeleteNote(int id);
 
     }
@@ -45,7 +45,7 @@ namespace ReorderDatabase.Data.Services
             return updatedNote;
         }
 
-        public async Task<Dtos.Note> SwapNote(Dtos.NoteSwap noteSwap)
+        public async Task<(Dtos.Note, bool)> SwapNote(Dtos.NoteSwap noteSwap)
         {
             var swappedNote = await noteRepository.SwapNote(noteSwap);
             return swappedNote;

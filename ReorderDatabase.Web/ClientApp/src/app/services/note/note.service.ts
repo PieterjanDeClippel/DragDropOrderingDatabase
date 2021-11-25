@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseUrlService } from '../base-url/base-url.service';
 import { Note } from '../../entities/Note';
+import { NoteSwapResult } from '../../entities/note-swap-result';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class NoteService {
   }
 
   public swapNote(noteBefore: Note | null, note: Note, noteAfter: Note | null) {
-    return this.httpClient.put<Note>(`${this.baseUrlService.baseUrl}/web/Note/swap`, {
+    return this.httpClient.put<NoteSwapResult>(`${this.baseUrlService.baseUrl}/web/Note/swap`, {
       noteBefore,
       note,
       noteAfter

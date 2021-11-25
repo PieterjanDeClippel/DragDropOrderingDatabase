@@ -42,10 +42,10 @@ namespace ReorderDatabase.Web.Controllers
         }
         
         [HttpPut("swap")]
-        public async Task<ActionResult<Note>> Swap([FromBody] NoteSwap noteSwap)
+        public async Task<ActionResult<NoteSwapResult>> Swap([FromBody] NoteSwap noteSwap)
         {
             var note = await noteService.SwapNote(noteSwap);
-            return Ok(note);
+            return Ok(new NoteSwapResult { Note = note.Item1, NeedsReindexing = note.Item2 });
         }
 
         [HttpDelete("{id}")]

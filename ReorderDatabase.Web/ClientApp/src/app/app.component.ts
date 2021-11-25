@@ -72,6 +72,7 @@ export class AppComponent {
   smallest$: Observable<number>;
   newNoteText: string = '';
   numberOfSwaps: number = 0;
+  needsReindexing: boolean = false;
 
   addNote(text: string) {
     this.noteService.createNote(text).subscribe((note) => {
@@ -93,14 +94,15 @@ export class AppComponent {
         event.currentIndex === 0 ? null : this.notes$.value[event.currentIndex - 1],
         <Note>event.container.data[event.currentIndex],
         event.currentIndex === event.container.data.length - 1 ? null : this.notes$.value[event.currentIndex + 1]
-      ).subscribe((note) => {
+      ).subscribe((noteSwapResult) => {
         let newState = this.notes$.value.map((item, index) => {
           if (index === event.currentIndex) {
-            return note;
+            return noteSwapResult.note;
           } else {
             return item;
           }
         });
+        this.needsReindexing = noteSwapResult.needsReindexing;
         this.notes$.next(newState);
       });
     } else {
